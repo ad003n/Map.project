@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>InputText1.qml</file>
+        <file>CustomPolyline.qml</file>
+    </qresource>
+</RCC>
