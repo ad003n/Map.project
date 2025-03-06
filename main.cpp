@@ -60,21 +60,33 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }*/
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickItem>
 #include <QQuickView>
 #include <QGeoCoordinate>
+#include <QQmlContext> //
+#include "maincontroller.h"
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
+    MainController mainController;
+
     QQmlApplicationEngine engine;
-    QQuickView  view;
+   /* QQuickView  view;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 //view.setSource(QUrl (QStringLiteral("qrc:/main.qml")));
 //view.show();
+    return app.exec();*/
+
+    engine.rootContext()->setContextProperty("mainController", &mainController);
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    if (engine.rootObjects().isEmpty())
+        return -1;
     return app.exec();
 }
 

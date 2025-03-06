@@ -4,13 +4,14 @@ QT += location\
     positioning \
     testlib
 
-SOURCES +=  maincontroller.cpp \
-            maincontroller.h\
-            Azimuth_NewCoord.cpp\
+SOURCES +=  main.cpp\
+            maincontroller.cpp \
             Azimuth_NewCoord.h\
+            line_discretization.h\
+            CoordinateConvert.h\
 
 
-
+HEADERS+=maincontroller.h\
 
 
 
