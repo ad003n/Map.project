@@ -5,6 +5,7 @@
 #include <QVector>
 #include <QGeoCoordinate>
 #include <QPointF>
+#include<QVariant>
 
 #include "line_discretization.h"
 #include "Azimuth_NewCoord.h"
@@ -12,30 +13,18 @@
 
 class MainController : public QObject {
     Q_OBJECT
-   /* Q_PROPERTY(
-        QVector<QGeoCoordinate> NCoordinates
-        READ getNCoordinates
-        WRITE setNCoordinates
-        NOTIFY NCoordinatesChanged)*/
-    Q_PROPERTY(QVariantList NCoordinatesFor READ getNCoordinates NOTIFY NCoordinatesChanged)
+    Q_PROPERTY(QVariantList new_CoordinatesFor READ getnew_Coordinates NOTIFY new_CoordinatesChanged)
 
-
-public:
-    explicit MainController(QObject *parent = nullptr);
-//    ~MainController() = default;
-QVariantList getNCoordinates() const;
-   // QVector<QGeoCoordinate> getNCoordinates() const;
-    void setNCoordinates(const QVector<QGeoCoordinate> &coordinates); // Добавляем метод для установки координат
- public slots:
-    void prCoordinates(const QGeoCoordinate &startCoord, const QGeoCoordinate &endCoord, double distanse);
-//
-
-signals:
-   // void NCoordinatesChanged(const QVector <QGeoCoordinate> &coordinates);
-  void NCoordinatesChanged();
-private:
-    QVector<QGeoCoordinate> newCoords; // Хранит новые координаты
-
+    public:
+        explicit MainController(QObject *parent = nullptr);
+        QVariantList getnew_Coordinates() const;
+        void setnew_Coordinates(const QVector<QGeoCoordinate> &coordinates);
+    public slots:
+        void processCoordinates(const QGeoCoordinate &startCoord, const QGeoCoordinate &endCoord, double distanse);
+    signals:
+        void new_CoordinatesChanged();
+    private:
+        QVector<QGeoCoordinate> newCoords; // Хранит новые координаты
 };
 
 #endif // MAINCONTROLLER_H

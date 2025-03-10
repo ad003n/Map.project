@@ -77,11 +77,6 @@ int main(int argc, char *argv[])
     MainController mainController;
 
     QQmlApplicationEngine engine;
-   /* QQuickView  view;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-//view.setSource(QUrl (QStringLiteral("qrc:/main.qml")));
-//view.show();
-    return app.exec();*/
 
     engine.rootContext()->setContextProperty("mainController", &mainController);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
@@ -89,5 +84,4 @@ int main(int argc, char *argv[])
         return -1;
     return app.exec();
 }
-
 

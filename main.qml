@@ -175,20 +175,15 @@ Window {
                         console.log("Starting calculation with coordinates:", startCoord, endCoord);
 
                         // mainController
-                        mainController.prCoordinates(startCoord, endCoord, stepValue);
-
-                        // new coordinates from mainController
-                        var coordinates = mainController.NCoordinatesFor;
-                      //  console.log("***", coordinates);
+                        mainController.processCoordinates(startCoord, endCoord, stepValue);
+                        var coordinates = mainController.new_CoordinatesFor;
 
                         if (coordinates && coordinates.length > 0) {
-
-                            //  markersModel new coord
                             for (var i = 0; i < coordinates.length; ++i) {
                                 markersModel.append({
                                     "latitude": coordinates[i].latitude,
                                     "longitude": coordinates[i].longitude,
-                                    "markerLabel": " " //+ (markersModel.count + 1)
+                                    "markerLabel": " "
                                 });
                                 console.log("Added marker:", coordinates[i].latitude, coordinates[i].longitude);
                             }
@@ -203,9 +198,8 @@ Window {
                 }
                 stepsInput.clear();
             }
-            ///
+
         }
-        ////
 
     }
 

@@ -9,7 +9,9 @@ SOURCES +=  main.cpp\
             Azimuth_NewCoord.h\
             line_discretization.h\
             CoordinateConvert.h\
-
+            Azimuth_NewCoordRealization.cpp\
+            line_discretizationRealization.cpp\
+            CoordinateConvertRealization.cpp\
 
 HEADERS+=maincontroller.h\
 
