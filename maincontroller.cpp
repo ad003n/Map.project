@@ -5,7 +5,7 @@
 MainController::MainController(QObject *parent) :QObject(parent){}
 
 
-QVariantList MainController::getnew_Coordinates() const {
+QVariantList MainController::getNewCoordinates() const {
      qDebug() << "getnew_CoordinatesForQML called";
      QVariantList coordList;
      for (const QGeoCoordinate &coord : newCoords) {
@@ -17,9 +17,9 @@ QVariantList MainController::getnew_Coordinates() const {
     return coordList;
 }
 
-void MainController::setnew_Coordinates(const QVector<QGeoCoordinate> &coordinates){
+void MainController::setNewCoordinates(const QVector<QGeoCoordinate> &coordinates){
      newCoords=coordinates;
-     emit new_CoordinatesChanged();
+     emit newCoordinatesChanged();
 }
 
 void MainController::processCoordinates(const QGeoCoordinate &startCoord, const QGeoCoordinate &endCoord, double distance) {
@@ -27,30 +27,30 @@ void MainController::processCoordinates(const QGeoCoordinate &startCoord, const 
 
      newCoords.clear();
 
-     QPointF start = ConvertSphericalToCartesian(startCoord);
-     QPointF end = ConvertSphericalToCartesian(endCoord);
+     QPointF start = convertSphericalToCartesian(startCoord);
+     QPointF end = convertSphericalToCartesian(endCoord);
      qDebug()<<"start cartesian"<<start;
      qDebug()<<"end cartesian"<<end;
-     QVector<QPointF> discretizationPoints = LineDiscretization(start, end, distance);
+     QVector<QPointF> discretizationPoints = lineDiscretization(start, end, distance);
 
      if (discretizationPoints.size() <= 2) {
-        emit new_CoordinatesChanged();
+        emit newCoordinatesChanged();
         return;
      }
 
-     double dx=distance*sin(Calculate_azimuth(startCoord, endCoord));
-     double dy=distance*cos(Calculate_azimuth(startCoord, endCoord));
-     qDebug()<<"calculate_azimuth(startCoord, endCoord)"<<Calculate_azimuth(startCoord, endCoord);
+     double dx=distance*sin(calculateAzimuth(startCoord, endCoord));
+     double dy=distance*cos(calculateAzimuth(startCoord, endCoord));
+     qDebug()<<"calculate azimuth(startCoord, endCoord)"<<calculateAzimuth(startCoord, endCoord);
      QGeoCoordinate currentCoord = startCoord;
 
      for (int i = 1; i < discretizationPoints.size() ; ++i) {
-        double azimuth = Calculate_azimuth(currentCoord, endCoord);
+        double azimuth = calculateAzimuth(currentCoord, endCoord);
 
-        QGeoCoordinate newCoord = NewCoordinate(currentCoord, azimuth, distance);
+        QGeoCoordinate newCoord = newCoordinate(currentCoord, azimuth, distance);
         newCoords.append(newCoord);
         currentCoord = newCoord;
         qDebug() << "Intermediate coordinate:" << newCoord;
      }
-    emit new_CoordinatesChanged();
+    emit newCoordinatesChanged();
 }
 

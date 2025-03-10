@@ -6,14 +6,14 @@ QT += location\
 
 SOURCES +=  main.cpp\
             maincontroller.cpp \
-            Azimuth_NewCoord.h\
-            line_discretization.h\
-            CoordinateConvert.h\
-            Azimuth_NewCoordRealization.cpp\
-            line_discretizationRealization.cpp\
-            CoordinateConvertRealization.cpp\
+            azimuthnewcoord.cpp\
+            linediscretization.cpp\
+            coordinateconvert.cpp\
 
-HEADERS+=maincontroller.h\
+HEADERS+=   maincontroller.h\
+            azimuthnewcoord.h\
+            linediscretization.h\
+            coordinateconvert.h\
 
 
 

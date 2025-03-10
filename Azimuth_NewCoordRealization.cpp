@@ -1,4 +1,4 @@
-#include "Azimuth_NewCoord.h"
+#include "azimuthnewcoord.h"
 #include <QtMath>
 
 QGeoCoordinate NewCoordinate(const QGeoCoordinate &coord, double azimuth, double distance)

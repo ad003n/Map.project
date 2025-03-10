@@ -7,22 +7,22 @@
 #include <QPointF>
 #include<QVariant>
 
-#include "line_discretization.h"
-#include "Azimuth_NewCoord.h"
-#include "CoordinateConvert.h"
+#include "linediscretization.h"
+#include "azimuthnewcoord.h"
+#include "coordinateconvert.h"
 
 class MainController : public QObject {
     Q_OBJECT
-    Q_PROPERTY(QVariantList new_CoordinatesFor READ getnew_Coordinates NOTIFY new_CoordinatesChanged)
+    Q_PROPERTY(QVariantList NewCoordinatesFor READ getNewCoordinates NOTIFY newCoordinatesChanged)
 
     public:
         explicit MainController(QObject *parent = nullptr);
-        QVariantList getnew_Coordinates() const;
-        void setnew_Coordinates(const QVector<QGeoCoordinate> &coordinates);
+        QVariantList getNewCoordinates() const;
+        void setNewCoordinates(const QVector<QGeoCoordinate> &coordinates);
     public slots:
         void processCoordinates(const QGeoCoordinate &startCoord, const QGeoCoordinate &endCoord, double distanse);
     signals:
-        void new_CoordinatesChanged();
+        void newCoordinatesChanged();
     private:
         QVector<QGeoCoordinate> newCoords; // Хранит новые координаты
 };

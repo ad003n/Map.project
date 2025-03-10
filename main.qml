@@ -176,7 +176,7 @@ Window {
 
                         // mainController
                         mainController.processCoordinates(startCoord, endCoord, stepValue);
-                        var coordinates = mainController.new_CoordinatesFor;
+                        var coordinates = mainController.NewCoordinatesFor;
 
                         if (coordinates && coordinates.length > 0) {
                             for (var i = 0; i < coordinates.length; ++i) {
