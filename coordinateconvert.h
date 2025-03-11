@@ -3,7 +3,7 @@
 
 #include <QPointF>
 #include <QGeoCoordinate>
-
-QPointF convertSphericalToCartesian(const QGeoCoordinate &latlong);
- QGeoCoordinate convertToGeo(const QGeoCoordinate &coord,  double dx, double dy);
+double vincentyDistance(const QGeoCoordinate& coord1, const QGeoCoordinate& coord2);
+QPointF geoToCartesian(const QGeoCoordinate& geo, const QGeoCoordinate& origin);
+static QGeoCoordinate cartesianToGeo(const QPointF& cart, const QGeoCoordinate& origin);
 #endif

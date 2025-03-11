@@ -27,8 +27,8 @@ void MainController::processCoordinates(const QGeoCoordinate &startCoord, const 
 
      newCoords.clear();
 
-     QPointF start = convertSphericalToCartesian(startCoord);
-     QPointF end = convertSphericalToCartesian(endCoord);
+     QPointF start=geoToCartesian(startCoord, startCoord);
+     QPointF end =geoToCartesian(endCoord, startCoord);
      qDebug()<<"start cartesian"<<start;
      qDebug()<<"end cartesian"<<end;
      QVector<QPointF> discretizationPoints = lineDiscretization(start, end, distance);
@@ -37,7 +37,9 @@ void MainController::processCoordinates(const QGeoCoordinate &startCoord, const 
         emit newCoordinatesChanged();
         return;
      }
-
+     double distance2=vincentyDistance (startCoord, endCoord);
+     double numberofPoints=discretizationPoints.size();
+     distance2=distance2/numberofPoints;
      double dx=distance*sin(calculateAzimuth(startCoord, endCoord));
      double dy=distance*cos(calculateAzimuth(startCoord, endCoord));
      qDebug()<<"calculate azimuth(startCoord, endCoord)"<<calculateAzimuth(startCoord, endCoord);
@@ -46,7 +48,8 @@ void MainController::processCoordinates(const QGeoCoordinate &startCoord, const 
      for (int i = 1; i < discretizationPoints.size() ; ++i) {
         double azimuth = calculateAzimuth(currentCoord, endCoord);
 
-        QGeoCoordinate newCoord = newCoordinate(currentCoord, azimuth, distance);
+
+        QGeoCoordinate newCoord = newCoordinate(currentCoord, azimuth, distance2);
         newCoords.append(newCoord);
         currentCoord = newCoord;
         qDebug() << "Intermediate coordinate:" << newCoord;
