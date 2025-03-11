@@ -59,7 +59,7 @@ double vincentyDistance(const QGeoCoordinate& coord1, const QGeoCoordinate& coor
 
     return kB * A * (sigma - deltaSigma);
 }
-
+//
 QPointF geoToCartesian(const QGeoCoordinate& geo, const QGeoCoordinate& origin)
 {
     double lat1 = qDegreesToRadians(origin.latitude());

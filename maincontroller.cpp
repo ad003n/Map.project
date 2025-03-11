@@ -52,5 +52,6 @@ void MainController::processCoordinates(const QGeoCoordinate &startCoord, const 
         qDebug() << "Intermediate coordinate:" << newCoord;
      }
     emit newCoordinatesChanged();
+     //
 }
 
