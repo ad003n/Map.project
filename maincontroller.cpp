@@ -37,6 +37,9 @@ void MainController::processCoordinates(const QGeoCoordinate &startCoord, const 
         emit newCoordinatesChanged();
         return;
      }
+     double distance2=vincentyDistance (startCoord, endCoord);
+     double numberofPoints=discretizationPoints.size();
+     distance2=distance2/numberofPoints;
      double dx=distance*sin(calculateAzimuth(startCoord, endCoord));
      double dy=distance*cos(calculateAzimuth(startCoord, endCoord));
      qDebug()<<"calculate azimuth(startCoord, endCoord)"<<calculateAzimuth(startCoord, endCoord);
@@ -46,12 +49,11 @@ void MainController::processCoordinates(const QGeoCoordinate &startCoord, const 
         double azimuth = calculateAzimuth(currentCoord, endCoord);
 
 
-        QGeoCoordinate newCoord = newCoordinate(currentCoord, azimuth, distance);
+        QGeoCoordinate newCoord = newCoordinate(currentCoord, azimuth, distance2);
         newCoords.append(newCoord);
         currentCoord = newCoord;
         qDebug() << "Intermediate coordinate:" << newCoord;
      }
     emit newCoordinatesChanged();
-     //
 }
 
