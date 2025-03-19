@@ -18,12 +18,18 @@ Window {
 
     property var coord: []
 
+
+
+
+
     Map {
         id: mapll
         anchors.fill: parent
         plugin: mapPlugin
         center: QtPositioning.coordinate(59.91, 10.75) // Oslo
         zoomLevel: 14
+
+
 
         MapItemView {
             id: mapItemView
@@ -33,12 +39,32 @@ Window {
                 coordinate: QtPositioning.coordinate(model.latitude, model.longitude)
                 anchorPoint.x: circle.width / 2
                 anchorPoint.y: circle.height / 2
+                property var currentCoord: QtPositioning.coordinate(0,0)
                 sourceItem: Rectangle {
                     id: circle
                     width: 20
                     height: 20
                     radius: width / 2 // Makes it a circle
                     color: "red"
+
+                    //
+                    Drag.active: dragArea.drag.active
+                    MouseArea{
+                        id:dragArea
+                        anchors.fill: parent
+                        drag.target: circle
+                        onReleased: {
+
+                            var newCoordinates = mapll.toCoordinate(Qt.point (mouse.x, mouse.y));
+                            console.log("       latitude "+ newCoordinates.latitude+" longitude "+newCoordinates.longitude+
+                                        " index "+ index);
+                            markersModel.setProperty (index, "latitude", newCoordinates.latitude);
+                            markersModel.setProperty (index, "longitude",newCoordinates.longitude);
+                        }
+                          }
+
+                   /**/
+                    //
                     Text {
                         id: textMarker
                         anchors.centerIn: parent
@@ -206,4 +232,5 @@ Window {
     ListModel {
         id: markersModel
     }
+
 }
